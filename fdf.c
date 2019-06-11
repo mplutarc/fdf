@@ -50,7 +50,7 @@ void	draw_line(int x0, int y0, int x1, int y1, t_img img)
 	img.y = y0;
 	dx = x1 - x0;
 	dy = y1 - y0;
-	f = ((dx > dy) ? dx : ((dy > dx) ? dy : 0)) / 2;
+	f = ((abs(dx) > abs(dy)) ? dx : ((abs(dy) > abs(dx)) ? dy : 0)) / 2;
 	fd = (dx >= dy) ? dx : dy;
 	sd = (fd == dx) ? dy : dx;
 	new_pxl(img, x0, y0);

@@ -54,12 +54,26 @@ void		draw_line(t_point first, t_point last, t_img img)
 
 	if (first.x < 0 || first.y < 0 || last.x < 0 || last.y < 0)
 		return ;
+<<<<<<< HEAD
 	f = 0;
 	dx = abs(last.x - first.x);
 	dy = abs(last.y - first.y);
 	diry = ((last.y - first.y) == 0 ? 0 : (last.y - first.y) / dy);
 	dirx = ((last.x - first.x) == 0 ? 0 : (last.x - first.x) / dx);
 	while ((first.x != last.x))
+=======
+	img.x = x0;
+	img.y = y0;
+	dx = x1 - x0;
+	dy = y1 - y0;
+	f = ((abs(dx) > abs(dy)) ? dx : ((abs(dy) > abs(dx)) ? dy : 0)) / 2;
+	fd = (dx >= dy) ? dx : dy;
+	sd = (fd == dx) ? dy : dx;
+	new_pxl(img, x0, y0);
+	printf("BEFORE\n eto fd %d\n eto sd %d\n eto f %d\n dx = %d, dy = %d\n", fd, sd, f, dx, dy);
+	int i = 0;
+	while(img.x != x1 && img.y != y1)
+>>>>>>> 02a03f560bf246ef8d24b71277149324753c1e8a
 	{
 		new_pxl(first, img);
 		f += dy;

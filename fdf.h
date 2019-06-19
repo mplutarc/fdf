@@ -6,7 +6,7 @@
 /*   By: mplutarc <mplutarc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 15:23:04 by mplutarc          #+#    #+#             */
-/*   Updated: 2019/06/18 17:19:08 by mplutarc         ###   ########.fr       */
+/*   Updated: 2019/06/18 20:33:13 by mplutarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <string.h>
+# include <fcntl.h>
 # include "math.h"
 # include "libft/libft.h"
 # include "gnl/get_next_line.h"
@@ -49,6 +50,7 @@ typedef struct		s_fdf
 	void			*mlx_ptr;
 	void			*win_ptr;
 	t_img			*img;
+	int				*map;
 }					t_fdf;
 
 int					main();

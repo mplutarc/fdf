@@ -6,27 +6,11 @@
 /*   By: mplutarc <mplutarc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 13:54:47 by mplutarc          #+#    #+#             */
-/*   Updated: 2019/04/22 20:49:31 by mplutarc         ###   ########.fr       */
+/*   Updated: 2019/06/19 15:21:33 by mplutarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-static size_t	ft_count(char const *s, char c)
-{
-	size_t	i;
-	size_t	count;
-
-	i = 0;
-	count = 0;
-	while (s[i])
-	{
-		if (s[i] == c && s[i + 1] != c)
-			count++;
-		i++;
-	}
-	return (count);
-}
 
 static char		**words(char const *s, char c, char **res)
 {
@@ -71,7 +55,7 @@ char			**ft_strsplit(char const *s, char c)
 		if (s[i] != c)
 			len++;
 	}
-	count = ft_count(s, c);
+	count = ft_count_words(s, c);
 	res = (char **)ft_strnew(sizeof(char *) * (len + count));
 	if (res)
 	{

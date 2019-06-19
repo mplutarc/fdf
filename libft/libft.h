@@ -6,7 +6,7 @@
 /*   By: mplutarc <mplutarc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 20:00:49 by mplutarc          #+#    #+#             */
-/*   Updated: 2019/04/29 00:40:21 by mplutarc         ###   ########.fr       */
+/*   Updated: 2019/06/18 20:33:04 by mplutarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,5 +88,6 @@ t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 char				**ft_free(char **res, size_t j);
 t_list				*ft_lstfree(t_list *lst);
 int					ft_isspace(char c);
+size_t				ft_count_words(char const *s, char c);
 
 #endif

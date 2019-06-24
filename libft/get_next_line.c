@@ -6,11 +6,12 @@
 /*   By: mplutarc <mplutarc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/25 13:27:59 by mplutarc          #+#    #+#             */
-/*   Updated: 2019/06/04 12:11:56 by mplutarc         ###   ########.fr       */
+/*   Updated: 2019/06/24 17:51:15 by mplutarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "libft.h"
+#include <stdio.h>
 
 static t_list	*find_fd(int fd, t_list **list)
 {

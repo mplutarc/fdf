@@ -6,7 +6,7 @@
 /*   By: mplutarc <mplutarc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 15:23:04 by mplutarc          #+#    #+#             */
-/*   Updated: 2019/06/18 20:33:13 by mplutarc         ###   ########.fr       */
+/*   Updated: 2019/06/24 19:33:45 by mplutarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <fcntl.h>
 # include "math.h"
 # include "libft/libft.h"
-# include "gnl/get_next_line.h"
+
 
 // typedef struct		s_bahzd
 // {
@@ -32,6 +32,7 @@ typedef struct		s_point
 {
 	int				x;
 	int				y;
+	int				z;
 }					t_point;
 
 typedef struct		s_img
@@ -56,6 +57,8 @@ typedef struct		s_fdf
 int					main();
 void				draw_line(t_point first, t_point last, t_img img);
 void				new_pxl(t_point p, t_img img);
-t_point				put_coords(int x, int y);
+t_point				put_coords(int x, int y, int z);
+int					valid(int ac, char **av);
+void				set_coords(t_list *map, int y);
 
 #endif

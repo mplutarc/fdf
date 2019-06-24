@@ -6,7 +6,7 @@
 /*   By: mplutarc <mplutarc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 20:00:49 by mplutarc          #+#    #+#             */
-/*   Updated: 2019/06/18 20:33:04 by mplutarc         ###   ########.fr       */
+/*   Updated: 2019/06/24 19:26:10 by mplutarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <string.h>
+
+# define BUFF_SIZE 10
 
 typedef struct		s_list
 {
@@ -89,5 +91,6 @@ char				**ft_free(char **res, size_t j);
 t_list				*ft_lstfree(t_list *lst);
 int					ft_isspace(char c);
 size_t				ft_count_words(char const *s, char c);
+int					get_next_line(const int fd, char **line);
 
 #endif

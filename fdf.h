@@ -6,7 +6,7 @@
 /*   By: mplutarc <mplutarc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 15:23:04 by mplutarc          #+#    #+#             */
-/*   Updated: 2019/06/24 19:33:45 by mplutarc         ###   ########.fr       */
+/*   Updated: 2019/06/25 17:35:44 by mplutarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,15 @@ typedef struct		s_fdf
 	void			*win_ptr;
 	t_img			*img;
 	int				*map;
+	int				width;
+	int				height;
 }					t_fdf;
 
 int					main();
 void				draw_line(t_point first, t_point last, t_img img);
 void				new_pxl(t_point p, t_img img);
 t_point				put_coords(int x, int y, int z);
-int					valid(int ac, char **av);
-void				set_coords(t_list *map, int y);
+int					valid(int ac, char **av, t_fdf *fdf);
+void				set_coords(t_list *map, t_fdf *fdf);
 
 #endif

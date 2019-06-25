@@ -6,7 +6,7 @@
 /*   By: mplutarc <mplutarc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 14:00:25 by mplutarc          #+#    #+#             */
-/*   Updated: 2019/06/24 18:48:35 by mplutarc         ###   ########.fr       */
+/*   Updated: 2019/06/25 17:36:10 by mplutarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int			main(int ac, char **av)
 	t_point		first;
 	t_point		last;
 
-	if (!valid(ac, av))
+	if (!valid(ac, av, &fdf))
 		return (0);
 	fdf.mlx_ptr = mlx_init();
 	fdf.win_ptr = mlx_new_window(fdf.mlx_ptr, 1800, 1200, "HUI");

@@ -6,14 +6,14 @@
 /*   By: mplutarc <mplutarc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 14:53:56 by mplutarc          #+#    #+#             */
-/*   Updated: 2019/06/24 19:35:13 by mplutarc         ###   ########.fr       */
+/*   Updated: 2019/06/25 17:47:12 by mplutarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include <stdio.h>
 
-int			valid(int ac, char **av)
+int			valid(int ac, char **av, t_fdf *fdf)
 {
 	char	*line;
 	t_list	*map;
@@ -36,28 +36,48 @@ int			valid(int ac, char **av)
 	{
 		if (!(size == ft_count_words(line, ' ')))
 			return (0);
-		map = ft_lstnew(line, (ft_strlen(line) + 1) * sizeof(char));
-		printf("ret - %d|   %s   |\n", ret, map->content);
+		ft_lstadd(&map, ft_lstnew(line, (ft_strlen(line) + 1) * sizeof(char)));
+		printf("ret = %d|   %s   |\n", ret, map->content);
 		i++;
-		set_coords(map, i);
 	}
+	set_coords(map, fdf);
 	return (1);
 }
 
-void		set_coords(t_list *map, int y)
+void		set_coords(t_list *map, t_fdf *fdf)
 {
 	int		x;
 	int		z;
+	int		y;
 	char	**line;
-	t_point	point;
+	t_point	*point;
+	t_list	*head;
+	size_t	p;
 
 	x = 0;
-	line = ft_strsplit(map->content, ' ');
-	while(line[x] != '\0')
+	p = 0;
+	head = map;
+	while (map)
 	{
-		z = ft_atoi(line[x]);
-		point = put_coords(x, y, z);
-		printf("x = %d, y = %d, z = %d\n", point.x, point.y, point.z);
-		x++;
+		p += ft_count_words(map->content, ' ') + 1;
+		map = map->next;
+	}
+	printf("p = %zu\n", p);
+	point = ft_memalloc(sizeof(int) * p);
+	p = 0;
+	y = 0;
+	while (head)
+	{
+		line = ft_strsplit(head->content, ' ');
+		x = 0;
+		while (line[x] != '\0')
+		{
+			z = ft_atoi(line[x]);
+			point[p] = put_coords(x, y, z);
+			x++;
+			p++;
+		}
+		y++;
+		head = head->next;
 	}
 }

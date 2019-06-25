@@ -6,7 +6,7 @@
 /*   By: mplutarc <mplutarc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 14:53:56 by mplutarc          #+#    #+#             */
-/*   Updated: 2019/06/25 17:47:12 by mplutarc         ###   ########.fr       */
+/*   Updated: 2019/06/25 20:35:09 by mplutarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 int			valid(int ac, char **av, t_fdf *fdf)
 {
 	char	*line;
-	t_list	*map;
 	int		fd;
 	size_t	size;
 	int		ret;
@@ -29,22 +28,23 @@ int			valid(int ac, char **av, t_fdf *fdf)
 	get_next_line(fd, &line);
 	size = ft_count_words(line, ' ');
 	printf("size = %zu\n", size);
-	map = ft_lstnew(line, (ft_strlen(line) + 1) * sizeof(char));
-	printf("map content = %s\n", map->content);
+	fdf->field = ft_lstnew(line, (ft_strlen(line) + 1) * sizeof(char));
+	printf("fdf->field content = %s\n", fdf->field->content);
 	i = 0;
 	while ((ret = get_next_line(fd, &line)) > 0)
 	{
 		if (!(size == ft_count_words(line, ' ')))
 			return (0);
-		ft_lstadd(&map, ft_lstnew(line, (ft_strlen(line) + 1) * sizeof(char)));
-		printf("ret = %d|   %s   |\n", ret, map->content);
+		ft_lstadd(&fdf->field, ft_lstnew(line,
+					(ft_strlen(line) + 1) * sizeof(char)));
+		printf("ret = %d|   %s   |\n", ret, fdf->field->content);
 		i++;
 	}
-	set_coords(map, fdf);
+	set_coords(fdf);
 	return (1);
 }
 
-void		set_coords(t_list *map, t_fdf *fdf)
+void		set_coords(t_fdf *fdf)
 {
 	int		x;
 	int		z;
@@ -56,11 +56,11 @@ void		set_coords(t_list *map, t_fdf *fdf)
 
 	x = 0;
 	p = 0;
-	head = map;
-	while (map)
+	head = fdf->field;
+	while (fdf->field)
 	{
-		p += ft_count_words(map->content, ' ') + 1;
-		map = map->next;
+		p += ft_count_words(fdf->field->content, ' ') + 1;
+		fdf->field = fdf->field->next;
 	}
 	printf("p = %zu\n", p);
 	point = ft_memalloc(sizeof(int) * p);
@@ -80,4 +80,7 @@ void		set_coords(t_list *map, t_fdf *fdf)
 		y++;
 		head = head->next;
 	}
+	fdf->point = point;
+	fdf->width = x;
+	fdf->height = y;
 }

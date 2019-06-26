@@ -6,7 +6,7 @@
 #    By: mplutarc <mplutarc@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/10 14:05:39 by mplutarc          #+#    #+#              #
-#    Updated: 2019/06/25 20:24:22 by mplutarc         ###   ########.fr        #
+#    Updated: 2019/06/26 17:27:01 by mplutarc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,8 @@ SRC = fdf.c valid.c draw_map.c
 OBJ = $(SRC:.c=.o)
 LIBFT = libft/libft.a
 HEADER = -c
+FLAGS = -Wall -Wextra -Werror
+
 
 all: $(NAME)
 

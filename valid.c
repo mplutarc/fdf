@@ -6,7 +6,7 @@
 /*   By: mplutarc <mplutarc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 14:53:56 by mplutarc          #+#    #+#             */
-/*   Updated: 2019/06/26 17:40:39 by mplutarc         ###   ########.fr       */
+/*   Updated: 2019/07/01 17:16:25 by mplutarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,9 @@ int			valid(int ac, char **av, t_fdf *fdf)
 	while ((ret = get_next_line(fd, &line)) > 0)
 	{
 		if (!(size == ft_count_words(line, ' ')))
+		{
 			return (0);
+		}
 		ft_lstadd(&fdf->field, ft_lstnew(line,
 					(ft_strlen(line) + 1) * sizeof(char)));
 		printf("ret = %d|   %s   |\n", ret, fdf->field->content);
@@ -54,13 +56,12 @@ void		set_coords(t_fdf *fdf)
 	x = 0;
 	p = 0;
 	head = fdf->field;
-	printf("I HAVE AUTISM\n");
 	while (fdf->field)
 	{
 		p += ft_count_words(fdf->field->content, ' ') + 1;
 		fdf->field = fdf->field->next;
 	}
-	point = ft_memalloc(sizeof(int) * p);
+	point = (t_point *)ft_memalloc(sizeof(t_point) * p);
 	p = 0;
 	y = 0;
 	while (head)
@@ -80,5 +81,4 @@ void		set_coords(t_fdf *fdf)
 	fdf->point = point;
 	fdf->width = x;
 	fdf->height = y;
-	printf("height = %d, width = %d\n", fdf->height, fdf->width);
 }

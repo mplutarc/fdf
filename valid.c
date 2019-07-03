@@ -6,7 +6,7 @@
 /*   By: mplutarc <mplutarc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 14:53:56 by mplutarc          #+#    #+#             */
-/*   Updated: 2019/07/01 17:16:25 by mplutarc         ###   ########.fr       */
+/*   Updated: 2019/07/01 19:52:55 by mplutarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ int			valid(int ac, char **av, t_fdf *fdf)
 		}
 		ft_lstadd(&fdf->field, ft_lstnew(line,
 					(ft_strlen(line) + 1) * sizeof(char)));
-		printf("ret = %d|   %s   |\n", ret, fdf->field->content);
 		i++;
 	}
 	set_coords(fdf);
@@ -82,3 +81,5 @@ void		set_coords(t_fdf *fdf)
 	fdf->width = x;
 	fdf->height = y;
 }
+
+

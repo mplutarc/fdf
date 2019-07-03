@@ -6,12 +6,10 @@
 /*   By: mplutarc <mplutarc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 14:00:25 by mplutarc          #+#    #+#             */
-/*   Updated: 2019/07/01 17:13:15 by mplutarc         ###   ########.fr       */
+/*   Updated: 2019/07/03 17:09:19 by mplutarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <mlx.h>
-#include <stdio.h>
 #include "fdf.h"
 
 int			main(int ac, char **av)
@@ -31,9 +29,15 @@ int			main(int ac, char **av)
 						&img->size_line, &img->endian);
 	img->bpp /= 8;
 	fdf.img = img;
+	fdf.scale = 20;
+	fdf.angle = 0;
+	fdf.offset_x = 0;
+	fdf.offset_y = 0;
 	draw_map(&fdf);
-	// printf("%p %p %p\n", fdf.mlx_ptr, fdf.win_ptr, fdf.img->img_ptr);
 	mlx_put_image_to_window(fdf.mlx_ptr, fdf.win_ptr, fdf.img->img_ptr, 0, 0);
+	mlx_hook(fdf.win_ptr, 2, 0, keypress, &fdf);
+	mlx_hook(fdf.win_ptr, 4, 0, mousepress, &fdf);
+	// mlx_hook(fdf.win_ptr, 6, 0, mousemove, &fdf);
 	mlx_loop(fdf.mlx_ptr);
 
 }
@@ -48,7 +52,6 @@ void		new_pxl(t_point p, t_img *img)
 
 void		draw_line(t_point first, t_point last, t_img *img, t_fdf *fdf)
 {
-	// printf("KEK\n");
 	int		dx;
 	int		dy;
 	int		f;
@@ -57,9 +60,6 @@ void		draw_line(t_point first, t_point last, t_img *img, t_fdf *fdf)
 	int		x;
 	int		y;
 
-	// if (first.x < 0 || first.y < 0 || last.x < 0 || last.y < 0)
-	// 	return ;
-	// printf("x0 = %d y0 = %d x1 = %d y1 = %d\n\n", first.x, first.y, last.x, last.y);
 	f = 0;
 	x = 0;
 	y = 0;
@@ -77,18 +77,14 @@ void		draw_line(t_point first, t_point last, t_img *img, t_fdf *fdf)
 			y++;
 			f -= dx;
 			new_pxl(first, img);
-			// printf("PRINTY y = %d dy = %d y0 = %d y1 = %d\n\n", y, dy, first.y, last.y);
 			if (y > dy)
 				return ;
 		}
 		if (x > dx)
 			return ;
-		// printf("PRINTX %d\n\n", x);
 		first.x += dirx;
 		x++;
 	}
-		// printf("KEK2\n");
-	// printf("\n\n\nVYSHEL\n\n\n");
 }
 
 t_point		put_coords(int x, int y, int z)

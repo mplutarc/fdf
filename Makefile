@@ -6,12 +6,12 @@
 #    By: mplutarc <mplutarc@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/10 14:05:39 by mplutarc          #+#    #+#              #
-#    Updated: 2019/07/01 17:53:54 by mplutarc         ###   ########.fr        #
+#    Updated: 2019/07/03 16:28:20 by mplutarc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fdf
-SRC = fdf.c valid.c draw_map.c
+SRC = fdf.c valid.c draw_map.c events.c
 OBJ = $(SRC:.c=.o)
 LIBFT = libft/libft.a
 HEADER = -c

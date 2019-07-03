@@ -6,7 +6,7 @@
 /*   By: mplutarc <mplutarc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 15:23:04 by mplutarc          #+#    #+#             */
-/*   Updated: 2019/07/01 18:01:40 by mplutarc         ###   ########.fr       */
+/*   Updated: 2019/07/03 17:07:26 by mplutarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 # include "math.h"
 # include "libft/libft.h"
 # include <stdio.h>
+#include <mlx.h>
+#include <stdio.h>
 # define WIDTH 1800
 # define HEIGHT 1200
 
@@ -58,6 +60,10 @@ typedef struct		s_fdf
 	int				*map;
 	int				width;
 	int				height;
+	int				scale;
+	int				offset_x;
+	int				offset_y;
+	int				angle;
 }					t_fdf;
 
 int					main();
@@ -70,6 +76,9 @@ void				draw_map(t_fdf *fdf);
 t_point				rotation_x(t_point p, int ngl);
 t_point				rotation_y(t_point p, int ngl);
 t_point				rotation_z(t_point p, int ngl);
-t_point				ft_kek(t_point p);
+t_point				ft_kek(t_point p, t_fdf *fdf);
+int					keypress(int but, void *tmp);
+int					mousepress(int but, int x, int y, void *tmp);
+int  		       mousemove(int x, int y, void *tmp);
 
 #endif

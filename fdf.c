@@ -6,7 +6,7 @@
 /*   By: mplutarc <mplutarc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 14:00:25 by mplutarc          #+#    #+#             */
-/*   Updated: 2019/07/03 17:09:19 by mplutarc         ###   ########.fr       */
+/*   Updated: 2019/07/09 21:00:53 by mplutarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int			main(int ac, char **av)
 
 	if (!valid(ac, av, &fdf))
 		return (0);
-	img = ft_memalloc(sizeof(t_img));
+	img = (t_img *)ft_memalloc(sizeof(t_img));
 	fdf.mlx_ptr = mlx_init();
 	fdf.win_ptr = mlx_new_window(fdf.mlx_ptr, WIDTH, HEIGHT, "HUI");
 	img->width = WIDTH;
@@ -37,9 +37,8 @@ int			main(int ac, char **av)
 	mlx_put_image_to_window(fdf.mlx_ptr, fdf.win_ptr, fdf.img->img_ptr, 0, 0);
 	mlx_hook(fdf.win_ptr, 2, 0, keypress, &fdf);
 	mlx_hook(fdf.win_ptr, 4, 0, mousepress, &fdf);
-	// mlx_hook(fdf.win_ptr, 6, 0, mousemove, &fdf);
+	mlx_hook(fdf.win_ptr, 17, 0, ft_close, &fdf);
 	mlx_loop(fdf.mlx_ptr);
-
 }
 
 void		new_pxl(t_point p, t_img *img)
@@ -52,39 +51,43 @@ void		new_pxl(t_point p, t_img *img)
 
 void		draw_line(t_point first, t_point last, t_img *img, t_fdf *fdf)
 {
-	int		dx;
-	int		dy;
+	t_bres	bres;
+
+	bres.dx = abs(last.x - first.x);
+	bres.dy = abs(last.y - first.y);
+	bres.diry = ((last.y - first.y) == 0 ? 0 : (last.y - first.y) / bres.dy);
+	bres.dirx = ((last.x - first.x) == 0 ? 0 : (last.x - first.x) / bres.dx);
+	if (!(bresenham(bres, first, fdf, img)))
+		return ;
+}
+
+int			bresenham(t_bres bres, t_point fir, t_fdf *fdf, t_img *img)
+{
 	int		f;
-	int		diry;
-	int		dirx;
 	int		x;
 	int		y;
 
 	f = 0;
-	x = 0;
+	x = -1;
 	y = 0;
-	dx = abs(last.x - first.x);
-	dy = abs(last.y - first.y);
-	diry = ((last.y - first.y) == 0 ? 0 : (last.y - first.y) / dy);
-	dirx = ((last.x - first.x) == 0 ? 0 : (last.x - first.x) / dx);
-	while (x < dx || y < dy)
+	while (++x < bres.dx || y < bres.dy)
 	{
-		new_pxl(first, img);
-		f += dy;
-		while (2 * f >= dx)
+		new_pxl(fir, img);
+		f += bres.dy;
+		while (2 * f >= bres.dx)
 		{
-			first.y += diry;
+			fir.y += bres.diry;
 			y++;
-			f -= dx;
-			new_pxl(first, img);
-			if (y > dy)
-				return ;
+			f -= bres.dx;
+			new_pxl(fir, img);
+			if (y > bres.dy)
+				return (0);
 		}
-		if (x > dx)
-			return ;
-		first.x += dirx;
-		x++;
+		if (x > bres.dx)
+			return (0);
+		fir.x += bres.dirx;
 	}
+	return (1);
 }
 
 t_point		put_coords(int x, int y, int z)

@@ -6,7 +6,7 @@
 /*   By: mplutarc <mplutarc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/22 19:23:05 by mplutarc          #+#    #+#             */
-/*   Updated: 2019/04/22 20:14:21 by mplutarc         ###   ########.fr       */
+/*   Updated: 2019/07/09 18:37:52 by mplutarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,14 @@
 
 t_list	*ft_lstfree(t_list *lst)
 {
-	free(lst);
+	t_list	*tmp;
+
+	while (lst)
+	{
+		tmp = lst->next;
+		free (lst->content);
+		free(lst);
+		lst = tmp;
+	}
 	return (NULL);
 }

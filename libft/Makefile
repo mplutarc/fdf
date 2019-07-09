@@ -6,7 +6,7 @@
 #    By: mplutarc <mplutarc@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/09 17:15:07 by kdune             #+#    #+#              #
-#    Updated: 2019/06/24 16:17:53 by mplutarc         ###   ########.fr        #
+#    Updated: 2019/07/09 21:05:59 by mplutarc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,9 +29,12 @@ SRCS_O = $(SRCS_C:.c=.o)
 
 all: $(NAME)
 
-$(NAME): $(SRCS_C)
-	@gcc -Wall -Wextra -Werror -c $(SRCS_C)  
+$(NAME): $(SRCS_O)
 	@ar rc libft.a $(SRCS_O)
+
+$(SRCS_O): %.o: %.c
+	gcc -c $< -o $@
+
 clean:
 	@rm -rf $(SRCS_O)
 

@@ -6,7 +6,7 @@
 /*   By: mplutarc <mplutarc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 14:53:56 by mplutarc          #+#    #+#             */
-/*   Updated: 2019/07/09 20:56:18 by mplutarc         ###   ########.fr       */
+/*   Updated: 2019/07/20 18:19:57 by mplutarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,9 @@ int			valid(int ac, char **av, t_fdf *fdf)
 	size_t	size;
 	int		ret;
 
-	if (ac != 2)
-		return (0);
 	fd = open(av[1], O_RDONLY);
-	get_next_line(fd, &line);
+	if (ac != 2 || get_next_line(fd, &line) == 0)
+		return (0);
 	size = ft_count_words(line, ' ');
 	fdf->field = ft_lstnew(line, (ft_strlen(line) + 1) * sizeof(char));
 	free(line);
@@ -59,8 +58,6 @@ void		set_coords(t_fdf *fdf)
 
 void		setset_coords(t_list *head, t_fdf *fdf, t_tmp *tmp, t_point **point)
 {
-	char	**line;
-
 	while (head)
 	{
 		tmp->p += ft_count_words(fdf->field->content, ' ') + 1;
@@ -69,12 +66,21 @@ void		setset_coords(t_list *head, t_fdf *fdf, t_tmp *tmp, t_point **point)
 	head = fdf->field;
 	*point = (t_point *)ft_memalloc(sizeof(t_point) * tmp->p);
 	tmp->p = 0;
+	head = head_loop(tmp, head, point);
+}
+
+t_list		*head_loop(t_tmp *tmp, t_list *head, t_point **point)
+{
+	char	**line;
+
 	while (head)
 	{
 		line = ft_strsplit(head->content, ' ');
 		tmp->x = 0;
 		while (line[tmp->x] != '\0')
 		{
+			if ((tmp->z = ft_atol(line[tmp->x]) > 2147483647))
+				;
 			tmp->z = ft_atoi(line[tmp->x]);
 			(*point)[tmp->p] = put_coords(tmp->x, tmp->y, tmp->z);
 			tmp->x++;
@@ -84,4 +90,5 @@ void		setset_coords(t_list *head, t_fdf *fdf, t_tmp *tmp, t_point **point)
 		tmp->y++;
 		head = head->next;
 	}
+	return (head);
 }

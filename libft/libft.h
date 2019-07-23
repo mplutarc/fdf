@@ -6,7 +6,7 @@
 /*   By: mplutarc <mplutarc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 20:00:49 by mplutarc          #+#    #+#             */
-/*   Updated: 2019/06/24 19:26:10 by mplutarc         ###   ########.fr       */
+/*   Updated: 2019/07/20 17:53:46 by mplutarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void				ft_putendl_fd(char const *s, int fd);
 void				ft_putnbr(int n);
 void				ft_putnbr_fd(int n, int fd);
 int					ft_isalpha(int c);
-int					ft_isdigit(int c);
+int					ft_isdigit(char c);
 int					ft_isalnum(int c);
 int					ft_isascii(int c);
 size_t				ft_strlen(const char *s);
@@ -66,6 +66,7 @@ void				*ft_memchr(const void *s, int c, size_t n);
 int					ft_memcmp(const void *s1, const void *s2, size_t n);
 void				*ft_memccpy(void *dst, const void *src, int c, size_t n);
 int					ft_atoi(const char *str);
+long long			ft_atol(const char *str);
 void				*ft_memalloc(size_t size);
 void				ft_memdel(void **ap);
 char				*ft_strnew(size_t size);

@@ -6,7 +6,7 @@
 /*   By: mplutarc <mplutarc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 14:00:25 by mplutarc          #+#    #+#             */
-/*   Updated: 2019/07/09 21:00:53 by mplutarc         ###   ########.fr       */
+/*   Updated: 2019/07/20 16:41:36 by mplutarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ int			main(int ac, char **av)
 	t_fdf		fdf;
 	t_img		*img;
 
-	if (!valid(ac, av, &fdf))
+	if (valid(ac, av, &fdf) == 0)
 		return (0);
 	img = (t_img *)ft_memalloc(sizeof(t_img));
 	fdf.mlx_ptr = mlx_init();
-	fdf.win_ptr = mlx_new_window(fdf.mlx_ptr, WIDTH, HEIGHT, "HUI");
+	fdf.win_ptr = mlx_new_window(fdf.mlx_ptr, WIDTH, HEIGHT, "BAZHD");
 	img->width = WIDTH;
 	img->height = HEIGHT;
 	img->img_ptr = mlx_new_image(fdf.mlx_ptr, img->width, img->height);
@@ -29,15 +29,14 @@ int			main(int ac, char **av)
 						&img->size_line, &img->endian);
 	img->bpp /= 8;
 	fdf.img = img;
-	fdf.scale = 20;
-	fdf.angle = 0;
-	fdf.offset_x = 0;
-	fdf.offset_y = 0;
+	put(&fdf);
 	draw_map(&fdf);
 	mlx_put_image_to_window(fdf.mlx_ptr, fdf.win_ptr, fdf.img->img_ptr, 0, 0);
 	mlx_hook(fdf.win_ptr, 2, 0, keypress, &fdf);
 	mlx_hook(fdf.win_ptr, 4, 0, mousepress, &fdf);
 	mlx_hook(fdf.win_ptr, 17, 0, ft_close, &fdf);
+	mlx_hook(fdf.win_ptr, 6, 0, mousemove, &fdf);
+	mlx_hook(fdf.win_ptr, 5, 0, mouserelease, &fdf);
 	mlx_loop(fdf.mlx_ptr);
 }
 
@@ -49,7 +48,7 @@ void		new_pxl(t_point p, t_img *img)
 				img->width * img->bpp) = 0xFFFFFF;
 }
 
-void		draw_line(t_point first, t_point last, t_img *img, t_fdf *fdf)
+void		draw_line(t_point first, t_point last, t_img *img)
 {
 	t_bres	bres;
 
@@ -57,11 +56,11 @@ void		draw_line(t_point first, t_point last, t_img *img, t_fdf *fdf)
 	bres.dy = abs(last.y - first.y);
 	bres.diry = ((last.y - first.y) == 0 ? 0 : (last.y - first.y) / bres.dy);
 	bres.dirx = ((last.x - first.x) == 0 ? 0 : (last.x - first.x) / bres.dx);
-	if (!(bresenham(bres, first, fdf, img)))
+	if (!(bresenham(bres, first, img)))
 		return ;
 }
 
-int			bresenham(t_bres bres, t_point fir, t_fdf *fdf, t_img *img)
+int			bresenham(t_bres bres, t_point fir, t_img *img)
 {
 	int		f;
 	int		x;

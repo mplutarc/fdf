@@ -6,7 +6,7 @@
 /*   By: mplutarc <mplutarc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/03 16:27:16 by mplutarc          #+#    #+#             */
-/*   Updated: 2019/07/09 21:10:13 by mplutarc         ###   ########.fr       */
+/*   Updated: 2019/07/10 19:45:38 by mplutarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,26 +31,6 @@ int		keypress(int but, void *tmp)
 		fdf->scale += 10;
 	else if (but == 78)
 		fdf->scale -= 10;
-	draw_map(fdf);
-	return (0);
-}
-
-int		mousepress(int but, int x, int y, void *tmp)
-{
-	t_fdf	*fdf;
-
-	fdf = (t_fdf *)tmp;
-	if (but == 53)
-		exit(0);
-	else if (but == 4)
-		fdf->angle += 1;
-	else if (but == 5)
-		fdf->angle -= 1;
-	else if (but == 1)
-	{
-		fdf->offset_x = x;
-		fdf->offset_y = y;
-	}
 	draw_map(fdf);
 	return (0);
 }

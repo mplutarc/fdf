@@ -6,11 +6,11 @@
 /*   By: mplutarc <mplutarc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 19:43:36 by mplutarc          #+#    #+#             */
-/*   Updated: 2019/04/27 00:14:44 by mplutarc         ###   ########.fr       */
+/*   Updated: 2019/07/20 14:42:42 by mplutarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_isdigit(int c)
+int		ft_isdigit(char c)
 {
 	if (c >= '0' && c <= '9')
 		return (1);

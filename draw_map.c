@@ -6,7 +6,7 @@
 /*   By: mplutarc <mplutarc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/25 17:55:52 by mplutarc          #+#    #+#             */
-/*   Updated: 2019/07/09 20:54:35 by mplutarc         ###   ########.fr       */
+/*   Updated: 2019/07/23 16:03:23 by mplutarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,14 @@ t_point	ft_kek(t_point p, t_fdf *fdf)
 {
 	t_point	res;
 
-	res.x = p.x * fdf->scale + fdf->offset_x;
-	res.y = p.y * fdf->scale + fdf->offset_y;
+	res.x = p.x * fdf->scale;
+	res.y = p.y * fdf->scale;
 	res.z = p.z * fdf->scale;
-	res = rotation_x(res, fdf->angle);
+	res = rotation_x(res, fdf->angle.x);
+	res = rotation_y(res, fdf->angle.y);
+	res = rotation_z(res, fdf->angle.z);
+	res.x += fdf->offset_x;
+	res.y += fdf->offset_y;
 	return (res);
 }
 
@@ -73,13 +77,13 @@ void	draw_map(t_fdf *fdf)
 		{
 			p1 = ft_kek(fdf->point[i], fdf);
 			p2 = ft_kek(fdf->point[i + 1], fdf);
-			draw_line(p1, p2, fdf->img, fdf);
+			draw_line(p1, p2, fdf->img);
 		}
 		if (i < (fdf->height - 1) * fdf->width)
 		{
 			p1 = ft_kek(fdf->point[i], fdf);
 			p2 = ft_kek(fdf->point[i + fdf->width], fdf);
-			draw_line(p1, p2, fdf->img, fdf);
+			draw_line(p1, p2, fdf->img);
 		}
 		i++;
 	}
